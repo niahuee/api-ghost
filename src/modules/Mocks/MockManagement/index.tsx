@@ -12,23 +12,27 @@ import CodeEditor from "../../../components/CodeEditor";
 import { Tabs } from "../../../components/Tabs";
 import { nanoid } from "nanoid";
 import { Button } from "../../../components/Button";
+import dictionary from "../../../dictionary";
 
 const schema = yup.object({
-  name: yup.string().required("Name is required"),
-  url: yup.string().required("URL is required"),
+  name: yup.string().required(dictionary.validations.name),
+  url: yup.string().required(dictionary.validations.url),
   http: yup.object({
     method: yup
       .mixed<HttpMethod>()
       .oneOf(Object.values(HttpMethod))
-      .required("Method is required"),
-    code: yup.number().typeError("Code is number").required("Code is required"),
+      .required(dictionary.validations.method),
+    code: yup
+      .number()
+      .typeError(dictionary.validations.code.format)
+      .required(dictionary.validations.code.required),
   }),
   delay: yup
     .number()
-    .min(0, "Delay must be a positive number")
-    .required("Delay is required"),
-  isActive: yup.boolean().default(true).required("Status is required"),
-  response: yup.string().required("Response body is required"),
+    .min(0, dictionary.validations.delay.format)
+    .required(dictionary.validations.delay.required),
+  isActive: yup.boolean().default(true).required(dictionary.validations.status),
+  response: yup.string().required(dictionary.validations.response),
 });
 
 interface MockManagementProps {
@@ -91,35 +95,35 @@ const MockManagement = ({
             value={field.value}
             setValue={setValue}
             field="isActive"
-            label="Status"
+            label={dictionary.status}
             options={[
-              { label: "Active", value: true },
-              { label: "Inactive", value: false },
+              { label: dictionary.active, value: true },
+              { label: dictionary.disabled, value: false },
             ]}
           />
         )}
       />
       <FormInput
-        label="Name"
+        label={dictionary.name}
         register={register("name")}
         error={errors.name?.message}
-        placeholder="Enter Name:"
+        placeholder={dictionary.enterName}
       />
       <FormInput
         label="Url"
         register={register("url")}
         error={errors.url?.message}
-        placeholder="Enter URL"
+        placeholder={dictionary.enterURL}
       />
       <Box className={classes.form__group}>
         <FormInput
-          label="Status Code"
+          label={dictionary.statusCode}
           type="number"
           register={register("http.code", { valueAsNumber: true })}
           error={errors.http?.code?.message}
         />
         <FormInput
-          label="Delay (ms)"
+          label={dictionary.delay}
           type="number"
           register={register("delay", { valueAsNumber: true })}
           error={errors.delay?.message}
@@ -130,7 +134,7 @@ const MockManagement = ({
         control={control}
         render={({ field }) => (
           <FormSelect
-            label="HTTP Method"
+            label={dictionary.method}
             value={field.value}
             onChange={field.onChange}
             options={Object.values(HttpMethod).map((method) => ({
@@ -159,7 +163,7 @@ const MockManagement = ({
                       if (!isValid) {
                         setError("response", {
                           type: "manual",
-                          message: "Invalid JSON format",
+                          message: dictionary.validations.invalidJson,
                         });
                       } else {
                         clearErrors("response");
@@ -173,7 +177,10 @@ const MockManagement = ({
           },
         ]}
       />
-      <Button title={mock?.id ? "Edit Mock" : "Create Mock"} type="submit" />
+      <Button
+        title={mock?.id ? dictionary.editMock : dictionary.createMock}
+        type="submit"
+      />
     </form>
   );
 };
