@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Api Ghost",
+  "description": "Haunt Your APIs with Seamless Mocks",
+  "version": "1.0.0",
+  "devtools_page": "devtools.html",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "css": ["assets/main.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["*.css", "*.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
+

@@ -1,0 +1,12 @@
+# deps
+node_modules/
+
+# build
+/dist
+
+# env
+.env
+.env.development
+
+# editor config
+.vscode
