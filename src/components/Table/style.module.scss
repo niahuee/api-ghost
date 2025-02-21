@@ -1,6 +1,28 @@
 .table__container {
   width: 100%;
   overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: $size-10;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $bg-primary;
+    border-radius: $size-4;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $border-table;
+    border-radius: $size-4;
+    border: $size-2 solid $bg-primary;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $border-input;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: $border-table $bg-primary;
 }
 
 .table {
