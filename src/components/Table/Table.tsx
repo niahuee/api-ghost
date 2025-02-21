@@ -22,6 +22,7 @@ export const Table = <T extends object>({ columns, data }: TableProps<T>) => {
               <TableTh
                 key={String(col.key)}
                 className={classes.table__head__item}
+                style={{ width: col.width }}
               >
                 {col.header}
               </TableTh>
@@ -36,6 +37,7 @@ export const Table = <T extends object>({ columns, data }: TableProps<T>) => {
                   <TableTd
                     key={String(col.key)}
                     className={classes.table__cell}
+                    style={{ width: col.width }}
                   >
                     {col.render
                       ? col.render(row)
