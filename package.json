@@ -12,6 +12,8 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mantine/core": "^7.17.0",
+    "@mantine/hooks": "^7.17.0",
     "framer-motion": "^6.5.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

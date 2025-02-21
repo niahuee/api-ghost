@@ -1,8 +1,13 @@
-import Mocks from "./pages/Mocks/Mocks";
+import { MantineProvider } from "@mantine/core";
+import Mocks from "./modules/Mocks";
+import "@/styles/global.scss";
 
 const App = () => {
-  return <Mocks />;
+  return (
+    <MantineProvider data-api-ghost="true">
+      <Mocks />
+    </MantineProvider>
+  );
 };
 
 export default App;
-

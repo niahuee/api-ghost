@@ -1,0 +1,39 @@
+.table__container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: $fg-primary;
+}
+
+.table__head {
+  background-color: $bg-primary;
+  font-size: $size-14;
+  padding: $size-12;
+  border-bottom: 1px solid $border-table;
+}
+
+.table__head__item {
+  text-align: left;
+  white-space: nowrap;
+  padding: $size-12;
+  font-size: $size-14;
+}
+
+.table__row {
+  border-bottom: 1px solid $border-table;
+  background: $bg-primary;
+  font-size: $size-12;
+}
+
+.table__cell {
+  padding: $size-18 $size-16;
+}
+
+.table__empty {
+  text-align: center;
+  padding: $size-20;
+}
