@@ -10,7 +10,6 @@
     {
       "matches": ["<all_urls>"],
       "js": ["contentScript.js"],
-      "css": ["assets/main.css"],
       "run_at": "document_start"
     }
   ],

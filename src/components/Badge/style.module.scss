@@ -1,0 +1,28 @@
+.badge {
+    padding: $size-4 $size-10;
+    font-size: $size-14;
+    border-radius: $size-4;
+    line-height: $size-20;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.green {
+    background-color: $bg-badge-green;
+    color: $badge-green;
+}
+
+.blue {
+    background-color: $bg-badge-accent;
+    color: $badge-accent;
+}
+
+.orange {
+    background-color: $bg-badge-yellow;
+    color: $badge-yellow;
+}
+
+.red {
+    background-color: $bg-badge-red;
+    color: $badge-red;
+}
