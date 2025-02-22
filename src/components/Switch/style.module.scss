@@ -1,0 +1,45 @@
+.switch {
+  all: unset;
+  min-width: 36px;
+  width: 36px;
+  height: 20px;
+  background-color: $bg-button-secondary;
+  border-radius: 9999px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  touch-action: manipulation;
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+
+  &__thumb {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    transition:
+      transform 0.25s ease-in-out,
+      background-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.switch[data-state="checked"] {
+  background-color: $accent;
+}
+
+.switch[data-state="checked"] .switch__thumb {
+  transform: translate(15px, -50%);
+}

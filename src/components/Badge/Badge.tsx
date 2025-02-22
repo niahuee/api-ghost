@@ -1,7 +1,7 @@
-import { Badge as MantineBadge } from "@mantine/core";
 import clsx from "clsx";
 import classes from "./style.module.scss";
 import { BadgeProps, BadgeType } from "./types";
+import { Box } from "@radix-ui/themes";
 
 export const Badge = ({
   color,
@@ -17,8 +17,8 @@ export const Badge = ({
     type === BadgeType.STATIC && classes.badge__dark
   );
   return (
-    <MantineBadge className={className} style={inlineStyle}>
+    <Box className={className} style={inlineStyle}>
       {value}
-    </MantineBadge>
+    </Box>
   );
 };
