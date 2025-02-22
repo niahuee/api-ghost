@@ -28,4 +28,3 @@ export interface Mock {
   group: string;
   response: MockResponse;
 }
-
