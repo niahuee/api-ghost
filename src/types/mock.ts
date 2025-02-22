@@ -1,9 +1,9 @@
 export enum HttpMethod {
-  GET = "Get",
-  POST = "Post",
-  PATCH = "Patch",
-  PUT = "Put",
-  DELETE = "Delete",
+  GET = "GET",
+  POST = "POST",
+  PATCH = "PATCH",
+  PUT = "PUT",
+  DELETE = "DELETE",
 }
 
 export type ResponseType = "json";
@@ -28,4 +28,3 @@ export interface Mock {
   group: string;
   response: MockResponse;
 }
-

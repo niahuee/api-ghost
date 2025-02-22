@@ -1,12 +1,13 @@
+import { Colors } from "../../types/types";
+
 export enum BadgeType {
-  GREEN = "green",
-  BLUE = "blue",
-  ORANGE = "orange",
-  RED = "red",
+  STATIC = "static",
+  DYNAMIC = "dynamic",
 }
 
 export interface BadgeProps {
-  type: BadgeType;
-  value: number;
+  color: Colors;
+  value: string | number;
+  width?: number;
+  type?: BadgeType;
 }
-

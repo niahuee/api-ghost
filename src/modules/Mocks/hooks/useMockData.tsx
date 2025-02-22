@@ -41,7 +41,7 @@ export const mockData: Mock[] = [
   {
     id: "3",
     name: "Delete Product",
-    url: "/api/product/456",
+    url: "https://dev.fetchdatacommon.com/postshttps://dev.fetchdatacommon.com/postshttps://dev.fetchdatacommon.com/posts",
     http: {
       method: HttpMethod.DELETE,
       code: 404,
@@ -81,4 +81,3 @@ export const useMockData = (searchQuery: string = "") => {
 
   return { data: filteredData };
 };
-
