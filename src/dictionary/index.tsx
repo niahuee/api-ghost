@@ -8,7 +8,11 @@ const dictionary = {
   active: "Active",
   action: "Action",
   empty: "No data",
+  mocks: "Mocks",
+  settings: "Settings",
+  tabs: "Tabs",
+  addMock: "Add Mock",
+  createGroup: "Create Group",
 };
 
 export default dictionary;
-

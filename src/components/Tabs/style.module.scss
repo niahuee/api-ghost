@@ -1,0 +1,30 @@
+.tabs {
+  display: flex;
+  border-bottom: 1px solid $border-table;
+  margin-bottom: 24px;
+}
+
+.tab {
+  padding: 6px 20px;
+  background: transparent;
+  border: none;
+  color: $fg-secondary;
+  position: relative;
+  cursor: pointer;
+
+  &[data-state="active"] {
+    color: $fg-primary;
+    font-weight: 500;
+  }
+
+  &[data-state="active"]::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: $accent;
+    border-radius: 2px;
+  }
+}
