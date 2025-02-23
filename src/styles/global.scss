@@ -4,3 +4,9 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+
+.content {
+  padding: 24px 8px;
+  background: $bg-primary;
+  min-height: 100dvh;
+}

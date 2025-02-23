@@ -6,32 +6,32 @@ import { Button, SecondaryButton } from "../../components/Button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import Search from "../../components/Search";
 import { useState } from "react";
+import dictionary from "../../dictionary";
 
 const Mocks = () => {
-  const { data } = useMockData();
-
   const [search, setSearch] = useState("");
+  const { data } = useMockData(search);
 
   const onSearchChange = (value: string) => {
     setSearch(value);
   };
 
   return (
-    <Box className={classes.wrapper}>
+    <Box>
       <Box className={classes.actions}>
         <Box className={classes.actions__left}>
           <Search value={search} onChange={onSearchChange} />
         </Box>
 
         <Box className={classes.actions__right}>
-          <SecondaryButton title="Create Group" />
-          <Button title="Add Mock" icon={PlusIcon} />
+          <SecondaryButton title={dictionary.createGroup} />
+          <Button title={dictionary.addMock} icon={PlusIcon} />
         </Box>
       </Box>
-      <Flex direction="column">
+      <Flex>
         {data.length > 0 ? (
           data.map((mock) => (
-            <Card key={mock.name} className={classes.apiCard}>
+            <Card key={mock.id} className={classes.apiCard}>
               <ApiCard
                 title={mock.name}
                 url={mock.url}
