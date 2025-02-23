@@ -9,17 +9,19 @@
   gap: 16px;
   color: white;
   margin-bottom: 24px;
-
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 525px) {
     flex-direction: column;
     gap: 8px;
   }
-  &__part {
-    display: flex;
-    gap: 16px;
-  }
-
-  &__part:first-child {
+  &__left {
     flex-grow: 1;
+  }
+  &__right {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    @media screen and (max-width: 300px) {
+      justify-content: center;
+    }
   }
 }
