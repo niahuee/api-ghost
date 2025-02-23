@@ -6,6 +6,8 @@ import { mapCodeToColor, mapMethodToColor } from "../../utils";
 import { HttpMethod } from "../../types/mock";
 import { Badge, BadgeType } from "../Badge";
 import Switch from "../Switch";
+import { Pencil1Icon, CopyIcon, TrashIcon } from "@radix-ui/react-icons";
+import ActionButton from "../ActionButton";
 
 interface ApiCardProps {
   title: string;
@@ -30,12 +32,12 @@ const ApiCard = ({ title, url, method, statusCode }: ApiCardProps) => {
               setEnabled(!enabled);
             }}
           />
-          <Heading as="h3" size="3">
-            {title}
-          </Heading>
+          <Heading as="h3">{title}</Heading>
         </Flex>
-        <Flex className={classes.card__group__part}>
-          <Text>Icon</Text>
+        <Flex className={classes.card__actions}>
+          <ActionButton icon={Pencil1Icon} />
+          <ActionButton icon={CopyIcon} />
+          <ActionButton icon={TrashIcon} />
         </Flex>
       </Flex>
 
