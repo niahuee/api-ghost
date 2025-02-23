@@ -3,3 +3,23 @@
   background: $bg-primary;
   min-height: 100dvh;
 }
+
+.actions {
+  display: flex;
+  gap: 16px;
+  color: white;
+  margin-bottom: 24px;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    gap: 8px;
+  }
+  &__part {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__part:first-child {
+    flex-grow: 1;
+  }
+}
