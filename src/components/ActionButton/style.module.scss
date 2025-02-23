@@ -1,0 +1,28 @@
+.action {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  width: auto;
+  height: auto;
+  align-self: flex-start;
+
+  &:hover {
+    background-color: $bg-button-secondary-hover;
+
+    svg {
+      fill: $bg-primary;
+    }
+  }
+
+  svg {
+    width: $size-16;
+    height: $size-16;
+    fill: $fg-button-secondary;
+  }
+}
