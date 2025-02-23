@@ -1,0 +1,57 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: $size-16;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+  border: 1px solid transparent;
+  color: $fg-primary;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.primary {
+  background-color: $accent;
+
+  &:hover {
+    background-color: $accent-hover;
+  }
+}
+
+.secondary {
+  background-color: transparent;
+  border-color: $border-table;
+
+  &:hover {
+    background-color: $bg-button-secondary-hover;
+  }
+}
+
+.danger {
+  background-color: $error;
+
+  &:hover {
+    background-color: $error;
+  }
+}
+
+.disabled {
+  background-color: $bg-secondary;
+  cursor: not-allowed;
+}
+
+.icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
