@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { HttpMethod, Mock } from "../../../types/mock";
+import { HttpMethod, Mock, ResponseType } from "../../../types/mock";
 
 export const mockData: Mock[] = [
   {
@@ -14,7 +14,7 @@ export const mockData: Mock[] = [
     isActive: true,
     group: "Users",
     response: {
-      type: "json",
+      type: ResponseType.JSON,
       body: JSON.stringify({
         id: 1,
         name: "Alice Johnson",
@@ -34,7 +34,7 @@ export const mockData: Mock[] = [
     isActive: true,
     group: "Orders",
     response: {
-      type: "json",
+      type: ResponseType.JSON,
       body: JSON.stringify({ orderId: 123, status: "created" }),
     },
   },
@@ -50,7 +50,7 @@ export const mockData: Mock[] = [
     isActive: false,
     group: "Products",
     response: {
-      type: "json",
+      type: ResponseType.JSON,
       body: "",
     },
   },
@@ -66,7 +66,7 @@ export const mockData: Mock[] = [
     isActive: false,
     group: "Products",
     response: {
-      type: "json",
+      type: ResponseType.JSON,
       body: "",
     },
   },
