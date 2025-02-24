@@ -5,8 +5,8 @@ node_modules/
 /dist
 
 # env
-.env
-.env.development
+.env*
+
 
 # editor config
 .vscode

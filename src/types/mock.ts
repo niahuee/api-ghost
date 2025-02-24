@@ -6,7 +6,9 @@ export enum HttpMethod {
   DELETE = "DELETE",
 }
 
-export type ResponseType = "json";
+export enum ResponseType {
+  JSON = "json",
+}
 
 export interface MockResponse {
   type: ResponseType;

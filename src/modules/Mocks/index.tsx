@@ -7,13 +7,36 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import Search from "../../components/Search";
 import { useState } from "react";
 import dictionary from "../../dictionary";
+import { useMockManager } from "./hooks/useMockManager";
+import { HttpMethod, ResponseType } from "../../types/mock";
 
 const Mocks = () => {
+  const { addMock } = useMockManager();
+
   const [search, setSearch] = useState("");
   const { data } = useMockData(search);
-
   const onSearchChange = (value: string) => {
     setSearch(value);
+  };
+
+  const handleAddMock = () => {
+    const newMock = {
+      id: "3",
+      name: "Delete Product",
+      url: "https://dev.fetchdatacommon.com/postshttps://dev.fetchdatacommon.com/postshttps://dev.fetchdatacommon.com/posts",
+      http: {
+        method: HttpMethod.DELETE,
+        code: 404,
+      },
+      delay: 300,
+      isActive: false,
+      group: "Products",
+      response: {
+        type: ResponseType.JSON,
+        body: "s",
+      },
+    };
+    addMock(newMock);
   };
 
   return (
@@ -25,7 +48,11 @@ const Mocks = () => {
 
         <Box className={classes.actions__right}>
           <SecondaryButton title={dictionary.createGroup} />
-          <Button title={dictionary.addMock} icon={PlusIcon} />
+          <Button
+            title={dictionary.addMock}
+            icon={PlusIcon}
+            onClick={handleAddMock}
+          />
         </Box>
       </Box>
       <Flex>
