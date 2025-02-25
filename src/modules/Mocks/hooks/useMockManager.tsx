@@ -1,78 +1,67 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Mock } from "../../../types/mock";
+import { storage } from "../../../utils/storage";
 
 const STORAGE_KEY = "mocks";
-const useChromeStorage = import.meta.env.VITE_ENVIRONMENT === "production";
+const useExtensionStorage = import.meta.env.VITE_ENVIRONMENT === "production";
 
-console.log(import.meta.env.VITE_ENVIRONMENT);
-
-export const useMockManager = () => {
+export const useMockManager = (searchQuery: string) => {
   const [mocks, setMocks] = useState<Mock[]>([]);
 
-  const loadMocks = useCallback(() => {
-    if (useChromeStorage) {
-      chrome.storage.local.get([STORAGE_KEY], (result) => {
-        setMocks(result[STORAGE_KEY] || []);
-      });
-    } else {
-      const localMocks = localStorage.getItem(STORAGE_KEY);
-      setMocks(localMocks ? JSON.parse(localMocks) : []);
-    }
+  const loadMocks = useCallback(async () => {
+    const storedMocks = await storage.get<Mock[]>(STORAGE_KEY);
+
+    setMocks(storedMocks || []);
   }, []);
 
   const saveMocks = useCallback((updatedMocks: Mock[]) => {
-    if (useChromeStorage) {
-      chrome.storage.local.set({ [STORAGE_KEY]: updatedMocks }, () => {
-        setMocks(updatedMocks);
-      });
-    } else {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedMocks));
-      setMocks(updatedMocks);
-    }
+    storage.set(STORAGE_KEY, updatedMocks);
+    setMocks(updatedMocks);
   }, []);
 
   const addMock = useCallback(
     (newMock: Mock) => {
-      const updatedMocks = [...mocks, newMock];
-      saveMocks(updatedMocks);
+      setMocks((prevMocks) => {
+        const updatedMocks = [...prevMocks, newMock];
+        saveMocks(updatedMocks);
+        return updatedMocks;
+      });
     },
-    [mocks, saveMocks]
+    [saveMocks]
   );
 
   const updateMock = useCallback(
     (id: string, updatedData: Partial<Mock>) => {
-      const updatedMocks = mocks.map((mock) =>
-        mock.id === id ? { ...mock, ...updatedData } : mock
-      );
-      saveMocks(updatedMocks);
+      setMocks((prevMocks) => {
+        const updatedMocks = prevMocks.map((mock) =>
+          mock.id === id ? { ...mock, ...updatedData } : mock
+        );
+        saveMocks(updatedMocks);
+        return updatedMocks;
+      });
     },
-    [mocks, saveMocks]
+    [saveMocks]
   );
 
   const deleteMock = useCallback(
     (id: string) => {
-      const updatedMocks = mocks.filter((mock) => mock.id !== id);
-      saveMocks(updatedMocks);
+      setMocks((prevMocks) => {
+        const updatedMocks = prevMocks.filter((mock) => mock.id !== id);
+        saveMocks(updatedMocks);
+        return updatedMocks;
+      });
     },
-    [mocks, saveMocks]
-  );
-
-  const getMockById = useCallback(
-    (id: string): Mock | undefined => {
-      return mocks.find((mock) => mock.id === id);
-    },
-    [mocks]
+    [saveMocks]
   );
 
   useEffect(() => {
     loadMocks();
 
-    if (useChromeStorage) {
-      const handleStorageChange = (
-        changes: { [key: string]: chrome.storage.StorageChange },
-        areaName: string
-      ) => {
-        if (areaName === "local" && changes[STORAGE_KEY]) {
+    if (useExtensionStorage) {
+      const handleStorageChange = (changes: {
+        [key: string]: chrome.storage.StorageChange;
+      }) => {
+        if (changes[STORAGE_KEY]) {
           setMocks(changes[STORAGE_KEY].newValue || []);
         }
       };
@@ -84,11 +73,19 @@ export const useMockManager = () => {
     }
   }, [loadMocks]);
 
+  const filteredMocks = useMemo(() => {
+    if (!searchQuery) return mocks;
+
+    const lowerSearch = searchQuery.toLowerCase();
+    return mocks.filter((mock) =>
+      mock.name?.toLowerCase().includes(lowerSearch)
+    );
+  }, [mocks, searchQuery]);
+
   return {
-    mocks,
+    filteredMocks,
     addMock,
     updateMock,
     deleteMock,
-    getMockById,
   };
 };
