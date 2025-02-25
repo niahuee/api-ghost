@@ -1,42 +1,53 @@
 import { Box, Text, Card, Flex } from "@radix-ui/themes";
 import classes from "./style.module.scss";
 import ApiCard from "../../components/ApiCard";
-import { useMockData } from "./hooks/useMockData";
 import { Button, SecondaryButton } from "../../components/Button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import Search from "../../components/Search";
 import { useState } from "react";
 import dictionary from "../../dictionary";
 import { useMockManager } from "./hooks/useMockManager";
-import { HttpMethod, ResponseType } from "../../types/mock";
+import { HttpMethod, Mock, ResponseType } from "../../types/mock";
 
 const Mocks = () => {
-  const { addMock } = useMockManager();
-
   const [search, setSearch] = useState("");
-  const { data } = useMockData(search);
+  const { filteredMocks, addMock, deleteMock, updateMock } =
+    useMockManager(search);
+
   const onSearchChange = (value: string) => {
     setSearch(value);
   };
 
   const handleAddMock = () => {
     const newMock = {
-      id: "3",
-      name: "Delete Product",
-      url: "https://dev.fetchdatacommon.com/postshttps://dev.fetchdatacommon.com/postshttps://dev.fetchdatacommon.com/posts",
+      id: `${Date.now()}`,
+      name: "New Mock",
+      url: "https://api.example.com/resource",
       http: {
-        method: HttpMethod.DELETE,
-        code: 404,
+        method: HttpMethod.GET,
+        code: 200,
       },
-      delay: 300,
-      isActive: false,
-      group: "Products",
+      delay: 100,
+      isActive: true,
+      group: "General",
       response: {
         type: ResponseType.JSON,
-        body: "s",
+        body: "{}",
       },
     };
     addMock(newMock);
+  };
+
+  const handleDeleteMock = (mock: Mock) => {
+    deleteMock(mock.id);
+  };
+
+  const handleEditMock = (mock: Mock) => {
+    updateMock(mock.id, { isActive: !mock.isActive });
+  };
+
+  const handleCopyMock = (mock: Mock) => {
+    console.log(mock);
   };
 
   return (
@@ -56,14 +67,14 @@ const Mocks = () => {
         </Box>
       </Box>
       <Flex>
-        {data.length > 0 ? (
-          data.map((mock) => (
+        {filteredMocks.length > 0 ? (
+          filteredMocks.map((mock) => (
             <Card key={mock.id} className={classes.apiCard}>
               <ApiCard
-                title={mock.name}
-                url={mock.url}
-                method={mock.http.method}
-                statusCode={mock.http.code}
+                mock={mock}
+                onEdit={handleEditMock}
+                onDelete={handleDeleteMock}
+                onCopy={handleCopyMock}
               />
             </Card>
           ))

@@ -3,24 +3,36 @@ import { Box, Card, Flex, Text, Heading } from "@radix-ui/themes";
 
 import classes from "./style.module.scss";
 import { mapCodeToColor, mapMethodToColor } from "../../utils";
-import { HttpMethod } from "../../types/mock";
+import { Mock } from "../../types/mock";
 import { Badge, BadgeType } from "../Badge";
 import Switch from "../Switch";
 import { Pencil1Icon, CopyIcon, TrashIcon } from "@radix-ui/react-icons";
 import ActionButton from "../ActionButton";
 
 interface ApiCardProps {
-  title: string;
-  url: string;
-  method: HttpMethod;
-  statusCode: number;
+  mock: Mock;
+  onEdit: (mock: Mock) => void;
+  onCopy: (mock: Mock) => void;
+  onDelete: (mock: Mock) => void;
 }
 
-const ApiCard = ({ title, url, method, statusCode }: ApiCardProps) => {
+const ApiCard = ({ mock, onEdit, onCopy, onDelete }: ApiCardProps) => {
   const [enabled, setEnabled] = useState(false);
 
-  const badgeColor = mapCodeToColor(statusCode);
-  const methodColor = mapMethodToColor(method);
+  const badgeColor = mapCodeToColor(mock.http.code);
+  const methodColor = mapMethodToColor(mock.http.method);
+
+  const handleEdit = () => {
+    onEdit(mock);
+  };
+
+  const handleCopy = () => {
+    onCopy(mock);
+  };
+
+  const handleDelete = () => {
+    onDelete(mock);
+  };
 
   return (
     <Card className={classes.card}>
@@ -32,18 +44,18 @@ const ApiCard = ({ title, url, method, statusCode }: ApiCardProps) => {
               setEnabled(!enabled);
             }}
           />
-          <Heading as="h3">{title}</Heading>
+          <Heading as="h3">{mock.name}</Heading>
         </Flex>
         <Flex className={classes.card__actions}>
-          <ActionButton icon={Pencil1Icon} />
-          <ActionButton icon={CopyIcon} />
-          <ActionButton icon={TrashIcon} />
+          <ActionButton icon={Pencil1Icon} onClick={handleEdit} />
+          <ActionButton icon={CopyIcon} onClick={handleCopy} />
+          <ActionButton icon={TrashIcon} onClick={handleDelete} />
         </Flex>
       </Flex>
 
       <Flex className={classes.card__group}>
         <Text as="p" className={classes.card__text}>
-          {url}
+          {mock.url}
         </Text>
       </Flex>
 
@@ -52,14 +64,14 @@ const ApiCard = ({ title, url, method, statusCode }: ApiCardProps) => {
           <Text className={classes.card__item__title}>Method:</Text>
           <Badge
             color={methodColor}
-            value={method}
+            value={mock.http.method}
             type={BadgeType.STATIC}
             width={80}
           />
         </Box>
         <Box className={classes.card__item}>
           <Text className={classes.card__item__title}>Code:</Text>
-          <Badge color={badgeColor} value={statusCode} />
+          <Badge color={badgeColor} value={mock.http.code} />
         </Box>
       </Box>
     </Card>
