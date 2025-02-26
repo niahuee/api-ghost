@@ -35,6 +35,7 @@
 
 .danger {
   background-color: $error;
+  color: $fg-primary;
 
   &:hover {
     background-color: $error;
