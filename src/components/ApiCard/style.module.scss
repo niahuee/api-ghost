@@ -14,8 +14,17 @@
     gap: 8px;
     &__part {
       display: flex;
-      align-items: center;
       gap: 8px;
+    }
+  }
+
+  &__title {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    min-width: 0;
+    @media screen and (max-width: 250px) {
+      display: none;
     }
   }
 

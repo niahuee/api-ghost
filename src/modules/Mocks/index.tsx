@@ -19,9 +19,10 @@ const Mocks = () => {
   };
 
   const handleAddMock = () => {
+    console.log("click click");
     const newMock = {
       id: `${Date.now()}`,
-      name: "New Mock",
+      name: `Mock ${Date.now()}`,
       url: "https://api.example.com/resource",
       http: {
         method: HttpMethod.GET,

@@ -8,6 +8,8 @@ import { Badge, BadgeType } from "../Badge";
 import Switch from "../Switch";
 import { Pencil1Icon, CopyIcon, TrashIcon } from "@radix-ui/react-icons";
 import ActionButton from "../ActionButton";
+import { Dialog, DialogType } from "../Dialog";
+import dictionary from "../../dictionary";
 
 interface ApiCardProps {
   mock: Mock;
@@ -44,12 +46,22 @@ const ApiCard = ({ mock, onEdit, onCopy, onDelete }: ApiCardProps) => {
               setEnabled(!enabled);
             }}
           />
-          <Heading as="h3">{mock.name}</Heading>
+          <Heading as="h3" className={classes.card__title}>
+            {mock.name}
+          </Heading>
         </Flex>
         <Flex className={classes.card__actions}>
           <ActionButton icon={Pencil1Icon} onClick={handleEdit} />
           <ActionButton icon={CopyIcon} onClick={handleCopy} />
-          <ActionButton icon={TrashIcon} onClick={handleDelete} />
+
+          <Dialog
+            title={dictionary.dialog.deleteMock.title}
+            description={dictionary.dialog.deleteMock.description}
+            trigger={<ActionButton icon={TrashIcon} />}
+            onConfirm={handleDelete}
+            type={DialogType.DANGER}
+            titleConfirm={dictionary.delete}
+          />
         </Flex>
       </Flex>
 

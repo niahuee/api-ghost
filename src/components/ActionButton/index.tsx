@@ -8,11 +8,11 @@ interface ActionButtonProps {
   ariaLabel?: string;
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({
+const ActionButton = ({
   icon: Icon,
   onClick,
   ariaLabel,
-}) => {
+}: ActionButtonProps) => {
   return (
     <IconButton
       onClick={onClick}
