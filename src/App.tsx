@@ -1,9 +1,10 @@
 import { Box } from "@radix-ui/themes";
 
-import "@/styles/global.scss";
 import { Tabs } from "./components/Tabs";
 import { usePages } from "./hooks/usePages";
 import dictionary from "./dictionary";
+import Drawer from "./components/Drawer";
+import "@/styles/global.scss";
 
 const App = () => {
   const { pages, defaultPage } = usePages();
@@ -15,6 +16,7 @@ const App = () => {
         tabs={pages}
         ariaLabel={dictionary.tabs}
       />
+      <Drawer />
     </Box>
   );
 };

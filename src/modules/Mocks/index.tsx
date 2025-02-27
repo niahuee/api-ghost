@@ -7,36 +7,24 @@ import Search from "../../components/Search";
 import { useState } from "react";
 import dictionary from "../../dictionary";
 import { useMockManager } from "./hooks/useMockManager";
-import { HttpMethod, Mock, ResponseType } from "../../types/mock";
+import { Mock } from "../../types/mock";
+import { useDrawerContext } from "../../contexts/DrawerContext";
 
 const Mocks = () => {
   const [search, setSearch] = useState("");
-  const { filteredMocks, addMock, deleteMock, updateMock } =
-    useMockManager(search);
+  const { filteredMocks, deleteMock } = useMockManager(search);
+
+  const { openDrawer } = useDrawerContext();
+
+  const handleMockManagement = (mock?: Mock) => {
+    openDrawer(
+      () => <div>Mock</div>,
+      mock ? dictionary.editMock : dictionary.addMock
+    );
+  };
 
   const onSearchChange = (value: string) => {
     setSearch(value);
-  };
-
-  const handleAddMock = () => {
-    console.log("click click");
-    const newMock = {
-      id: `${Date.now()}`,
-      name: `Mock ${Date.now()}`,
-      url: "https://api.example.com/resource",
-      http: {
-        method: HttpMethod.GET,
-        code: 200,
-      },
-      delay: 100,
-      isActive: true,
-      group: "General",
-      response: {
-        type: ResponseType.JSON,
-        body: "{}",
-      },
-    };
-    addMock(newMock);
   };
 
   const handleDeleteMock = (mock: Mock) => {
@@ -44,11 +32,11 @@ const Mocks = () => {
   };
 
   const handleEditMock = (mock: Mock) => {
-    updateMock(mock.id, { isActive: !mock.isActive });
+    handleMockManagement(mock);
   };
 
   const handleCopyMock = (mock: Mock) => {
-    console.log(mock);
+    handleMockManagement(mock);
   };
 
   return (
@@ -63,7 +51,7 @@ const Mocks = () => {
           <Button
             title={dictionary.addMock}
             icon={PlusIcon}
-            onClick={handleAddMock}
+            onClick={() => handleMockManagement()}
           />
         </Box>
       </Box>

@@ -22,8 +22,6 @@ export const useMockManager = (searchQuery: string) => {
   const addMock = useCallback(
     (newMock: Mock) => {
       setMocks((prevMocks) => {
-        console.log("adding");
-
         const updatedMocks = [...prevMocks, newMock];
         saveMocks(updatedMocks);
         return updatedMocks;
