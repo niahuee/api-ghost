@@ -1,0 +1,56 @@
+.notification__container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.notification {
+  padding: 12px;
+  border-radius: 6px;
+  line-height: $size-20;
+  font-size: $size-14;
+  color: $fg-primary;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 150px;
+  max-width: 350px;
+  animation:
+    fadeIn 0.3s ease-in-out,
+    fadeOut 0.3s ease-out 2.7s forwards;
+}
+
+.info {
+  background-color: $success;
+}
+
+.error {
+  background-color: $error;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
