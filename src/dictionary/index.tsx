@@ -12,6 +12,7 @@ const dictionary = {
   settings: "Settings",
   tabs: "Tabs",
   addMock: "Add Mock",
+  editMock: "Edit Mock",
   createGroup: "Create Group",
   cancel: "Cancel",
   continue: "Continue",
@@ -22,6 +23,7 @@ const dictionary = {
       description: "Are you sure you want to delete this mock?",
     },
   },
+  close: "Close",
 };
 
 export default dictionary;
