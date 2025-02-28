@@ -1,18 +1,19 @@
-import { Box, Text, Card, Flex } from "@radix-ui/themes";
+import { Box, Card, Flex } from "@radix-ui/themes";
 import { Button, SecondaryButton } from "../../components/Button";
 import { Mock } from "../../types/mock";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useDrawerContext } from "../../contexts/DrawerContext";
 import { useMockManager } from "./hooks/useMockManager";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ApiCard from "../../components/ApiCard";
 import classes from "./style.module.scss";
 import dictionary from "../../dictionary";
 import Search from "../../components/Search";
+import EmptyState from "../../components/EmptyState";
 
 const Mocks = () => {
   const [search, setSearch] = useState("");
-  const { filteredMocks, deleteMock } = useMockManager(search);
+  const { filteredMocks: mocks, deleteMock } = useMockManager(search);
 
   const { openDrawer } = useDrawerContext();
 
@@ -39,6 +40,15 @@ const Mocks = () => {
     handleMockManagement(mock);
   };
 
+  const isEmptySearch = search.length > 0;
+  const isEmptyMocks = mocks.length === 0;
+
+  const emptyState = useMemo(() => {
+    return isEmptySearch && isEmptyMocks
+      ? dictionary.empty.search
+      : dictionary.empty.mocks;
+  }, [isEmptySearch, isEmptyMocks]);
+
   return (
     <Box>
       <Box className={classes.actions}>
@@ -56,8 +66,8 @@ const Mocks = () => {
         </Box>
       </Box>
       <Flex>
-        {filteredMocks.length > 0 ? (
-          filteredMocks.map((mock) => (
+        {mocks.length > 0 ? (
+          mocks.map((mock) => (
             <Card key={mock.id} className={classes.apiCard}>
               <ApiCard
                 mock={mock}
@@ -68,9 +78,10 @@ const Mocks = () => {
             </Card>
           ))
         ) : (
-          <Card className={classes.noData}>
-            <Text as="p">No data available</Text>
-          </Card>
+          <EmptyState
+            title={emptyState.title}
+            description={emptyState.description}
+          />
         )}
       </Flex>
     </Box>

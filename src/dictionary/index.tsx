@@ -7,7 +7,6 @@ const dictionary = {
   delay: "Delay (ms)",
   active: "Active",
   action: "Action",
-  empty: "No data",
   mocks: "Mocks",
   settings: "Settings",
   tabs: "Tabs",
@@ -24,6 +23,16 @@ const dictionary = {
     },
   },
   close: "Close",
+  empty: {
+    search: {
+      title: "No results found",
+      description: "Try adjusting your search to find what you need.",
+    },
+    mocks: {
+      title: "No items yet",
+      description: "Add your first mock to get started.",
+    },
+  },
 };
 
 export default dictionary;

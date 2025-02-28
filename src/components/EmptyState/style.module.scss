@@ -1,0 +1,17 @@
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: $size-16;
+  gap: 8px;
+  &__title {
+    font-weight: 500;
+    color: $fg-primary;
+  }
+  &__description {
+    color: $fg-secondary;
+    font-weight: 400;
+    text-align: center;
+  }
+}
