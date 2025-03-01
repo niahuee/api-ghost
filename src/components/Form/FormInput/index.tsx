@@ -29,6 +29,7 @@ const FormInput = ({
         {...register}
         className={`${classes.form__input} ${error ? classes.form__input__error : ""}`}
         placeholder={placeholder}
+        autoComplete="off"
       />
       {error && (
         <Text as="span" className={classes.form__error}>
