@@ -1,0 +1,90 @@
+.select {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  &__title {
+    color: $fg-primary;
+    font-size: $size-14;
+  }
+
+  &__error {
+    color: $error;
+    font-size: $size-12;
+  }
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid $border-input;
+    border-radius: 4px;
+    background-color: $bg-input;
+    font-size: $size-14;
+    transition: border-color 0.2s ease-in-out;
+    color: $fg-primary;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      border-color: $border-input-active;
+    }
+
+    &:focus {
+      border-color: $border-input-active;
+      outline: none;
+    }
+
+    &__error {
+      border-color: $error;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  &__chevron {
+    width: 16px;
+    height: 16px;
+    color: $fg-secondary;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &__content {
+    background-color: $bg-input;
+    border-radius: 4px;
+    color: $fg-primary;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  &__item {
+    padding: 8px 12px;
+    font-size: $size-14;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: $border-input-active;
+    }
+
+    &[data-state="checked"] {
+      background-color: $border-input-active;
+      font-weight: 500;
+    }
+  }
+}

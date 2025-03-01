@@ -33,6 +33,7 @@ const dictionary = {
       description: "Add your first mock to get started.",
     },
   },
+  selectOption: "Select an option",
 };
 
 export default dictionary;
