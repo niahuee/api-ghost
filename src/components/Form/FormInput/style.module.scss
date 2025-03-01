@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  &__label {
+    color: $fg-primary;
+    font-size: $size-14;
+    font-weight: 500;
+  }
+  &__input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid $border-input;
+    background: $bg-input;
+    font-size: $size-14;
+    color: $fg-primary;
+    border-radius: 4px;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:hover {
+      border-color: $border-input-active;
+    }
+
+    &:focus {
+      border-color: $border-input-active;
+      box-shadow: 0 0 4px rgba(0, 0, 255, 0.3);
+      outline: none;
+    }
+
+    &.form__input__error {
+      border-color: $error;
+    }
+  }
+  &__error {
+    color: $error;
+    font-size: $size-12;
+  }
+}
