@@ -19,7 +19,7 @@ export const useMockManager = (searchQuery: string) => {
     setMocks(updatedMocks);
   }, []);
 
-  const addMock = useCallback(
+  const createMock = useCallback(
     (newMock: Mock) => {
       setMocks((prevMocks) => {
         const updatedMocks = [...prevMocks, newMock];
@@ -84,7 +84,7 @@ export const useMockManager = (searchQuery: string) => {
 
   return {
     filteredMocks,
-    addMock,
+    createMock,
     updateMock,
     deleteMock,
   };
