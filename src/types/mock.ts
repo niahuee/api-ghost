@@ -6,27 +6,18 @@ export enum HttpMethod {
   DELETE = "DELETE",
 }
 
-export enum ResponseType {
-  JSON = "json",
-}
-
-export interface MockResponse {
-  type: ResponseType;
-  body: string;
-}
-
 export interface HttpConfig {
   method: HttpMethod;
   code: number;
 }
 
 export interface Mock {
-  id: string;
+  id?: string;
   name: string;
   url: string;
   http: HttpConfig;
   delay: number;
   isActive: boolean;
-  group: string;
-  response: MockResponse;
+  group?: string;
+  response: string;
 }

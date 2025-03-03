@@ -10,16 +10,28 @@ import classes from "./style.module.scss";
 import dictionary from "../../dictionary";
 import Search from "../../components/Search";
 import EmptyState from "../../components/EmptyState";
+import MockManagement from "./MockManagement";
 
 const Mocks = () => {
   const [search, setSearch] = useState("");
-  const { filteredMocks: mocks, deleteMock } = useMockManager(search);
+  const {
+    filteredMocks: mocks,
+    deleteMock,
+    updateMock,
+    createMock,
+  } = useMockManager(search);
 
   const { openDrawer } = useDrawerContext();
 
-  const handleMockManagement = (mock?: Mock) => {
+  const handleMock = (mock?: Mock) => {
     openDrawer(
-      () => <div>Mock</div>,
+      () => (
+        <MockManagement
+          mock={mock}
+          updateMock={updateMock}
+          createMock={createMock}
+        />
+      ),
       mock ? dictionary.editMock : dictionary.addMock
     );
   };
@@ -29,15 +41,15 @@ const Mocks = () => {
   };
 
   const handleDeleteMock = (mock: Mock) => {
-    deleteMock(mock.id);
+    deleteMock(mock.id!);
   };
 
   const handleEditMock = (mock: Mock) => {
-    handleMockManagement(mock);
+    handleMock(mock);
   };
 
   const handleCopyMock = (mock: Mock) => {
-    handleMockManagement(mock);
+    handleMock(mock);
   };
 
   const isEmptySearch = search.length > 0;
@@ -61,7 +73,7 @@ const Mocks = () => {
           <Button
             title={dictionary.addMock}
             icon={PlusIcon}
-            onClick={() => handleMockManagement()}
+            onClick={() => handleMock()}
           />
         </Box>
       </Box>

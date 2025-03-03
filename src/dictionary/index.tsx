@@ -9,7 +9,7 @@ const dictionary = {
   action: "Action",
   mocks: "Mocks",
   settings: "Settings",
-  tabs: "Tabs",
+  tabs: "Api Ghost Tabs",
   addMock: "Add Mock",
   editMock: "Edit Mock",
   createGroup: "Create Group",
