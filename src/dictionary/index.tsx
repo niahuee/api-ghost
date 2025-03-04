@@ -1,11 +1,15 @@
 const dictionary = {
   name: "Name",
+  enterName: "Enter Name:",
+  enterURL: "Enter Name:",
   url: "Url",
-  method: "Method",
+  method: "HTTP Method",
   statusCode: "Status Code",
+  status: "Status",
   code: "Code",
   delay: "Delay (ms)",
   active: "Active",
+  disabled: "Disabled",
   action: "Action",
   mocks: "Mocks",
   settings: "Settings",
@@ -13,6 +17,7 @@ const dictionary = {
   addMock: "Add Mock",
   editMock: "Edit Mock",
   createGroup: "Create Group",
+  createMock: "Create Mock",
   cancel: "Cancel",
   continue: "Continue",
   delete: "Delete",
@@ -34,6 +39,22 @@ const dictionary = {
     },
   },
   selectOption: "Select an option",
+  validations: {
+    name: "Name is required",
+    url: "URL is required",
+    method: "Method is required",
+    code: {
+      format: "Code should be a number",
+      required: "Code is required",
+    },
+    delay: {
+      format: "Delay must be a positive number",
+      required: "Delay is required",
+    },
+    response: "Response body is required",
+    status: "Status is required",
+    invalidJson: "Invalid JSON format",
+  },
 };
 
 export default dictionary;
